@@ -47,9 +47,16 @@ document.cookie='item_color_set='+ set_color +'; Max-Age=5184000';
 
 
 setTimeout(()=>{
-    setup();
+    if(is_login()){
+        setup(); }
 }, 100);
 
+
+function is_login(){
+    if(document.querySelector('.CommentWebForm_not-loggedin__5AZyI')){
+        return false; }
+    else{
+        return true; }}
 
 
 function setup(){
