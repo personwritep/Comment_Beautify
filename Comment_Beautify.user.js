@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Comment Beautify
 // @namespace        http://tampermonkey.net/
-// @version        1.0
+// @version        1.1
 // @description        コメント送信画面の文末空白行を削除
 // @author        Ameba Blog User
 // @match        https://comment.ameba.jp/*
@@ -90,12 +90,12 @@ function setup(){
         help_icon +'</a>'+
 
         '<style>'+
-        '#controll { margin: 3px 10px 0 auto; } '+
-        '#pos_sw { display: inline-block; width: 20px; height: 20px; '+
-        'vertical-align: -2px; border: 1px solid #777; cursor: pointer; } '+
+        '#controll { margin: 3px 10px 0 auto; font-family: Meiryo; } '+
+        '#pos_sw { display: inline-block; width: 20px; height: 20px; vertical-align: -2px; '+
+        'border: 1px solid #777; cursor: pointer; } '+
         '#pos_sw svg { height: 16px; width: 18px; padding: 1px; fill: #666; } '+
-        '#color_sw { width: 24px; height: 28px; border: none; '+
-        'vertical-align: -4px; background-color: transparent; cursor: pointer; } '+
+        '#color_sw { width: 24px; height: 28px; border: none; vertical-align: -4px; '+
+        'background-color: transparent; cursor: pointer; } '+
         '.cb_h { margin-left: 12px; vertical-align: -7px; cursor: pointer; } '+
         'body { background: '+ set_color +'; } '+
         '.GlobalHeader_icon__pklTU { margin-top: 5px; } '+
@@ -110,19 +110,17 @@ function setup(){
     controll +=
         'body { overflow-x: hidden; overflow-y: hidden; } '+
         '.CommentWebForm_contents__5GCY5 { margin: 1rem 0 0.5em; } '+
-        '.CommentWebForm_contents-inner___lpC2, '+
-        '.CommentWebForm_not-loggedin__5AZyI { min-width: 400px; max-width: 671px; } '+
+        '.CommentWebForm_contents-inner___lpC2 { min-width: 400px; max-width: 671px; } '+
         '@media screen and (max-width: 719px) { '+
-        '.CommentWebForm_contents-inner___lpC2, '+
-        '.CommentWebForm_not-loggedin__5AZyI { max-width: calc(100% - 48px); } } '+
+        '.CommentWebForm_contents-inner___lpC2 { max-width: calc(100% - 48px); }} '+
         '.CommentWebEntry_root__IP_vN { padding: 4px 16px; border-radius: 6px; } '+
-        '.CommentWebEntry_image__Gc2Sg { border-radius: 0; } '+
-        '.CommentWebEntry_image__Gc2Sg:after { border-radius: 0; } '+
+        '.CommentWebEntry_image__Gc2Sg, .CommentWebEntry_image__Gc2Sg:after { '+
+        'border-radius: 0; } '+
         '.CommentWebForm_form__J5yQZ { margin-top: 1rem; } '+
         '.CommentWebForm_field__7n0RJ { margin-top: 0; } '+
         '#commentText { border-radius: 0; overflow-y: scroll; width: 100% !important; '+
         'height: calc(100Vh - 500px); } '+
-        '.spui-TextField:focus, .spui-TextArea:focus { box-shadow: none; border-color: #2196F3; } '+
+        '.spui-TextArea:focus { box-shadow: none; border-color: #2196F3; } '+
         '#commentText::-webkit-scrollbar { width: 16px; } '+
         '#commentText::-webkit-scrollbar-corner { background: #00aaffd6; } '+
         '#commentText::-webkit-scrollbar-thumb { background: #ccc; border: 2px solid #eee; } '+
@@ -137,26 +135,11 @@ function setup(){
         '.TextAreaWithCounter_text-caution___NJAW { position: absolute; top: -34px; left: 160px; } '+
         '.TextAreaWithCounter_text-caution___NJAW + .TextAreaWithCounter_text__zo7D7 { '+
         'margin-top: .5rem; } '+
-        '.spui-Button--large { padding: 8px 16px 5px; border-radius: 6px; } '+
+        '.spui-Button--large { padding: 8px 16px 5px; border-radius: 6px; font-family: Meiryo; } '+
         '.spui-Button--contained { background-color: #009688; } '+
         '.spui-Button--contained:not([disabled]):hover { background-color: #00796b; } '+
         '.CommentWebFooter_root__ogIEa { margin-top: 0; background: #4fbbef; } '+
-        '.CommentWebFooter_copyrights__YEd65 { padding: 4px 0 3px; } '+
-
-        // ログアウト時のデザイン
-        '.CommentWebForm_not-loggedin-header__tlq8l { padding-top: 0; } '+
-        '.CommentWebForm_title__Tj2Kz { margin-top: 0.5em; } '+
-        '.CommentWebForm_description__mHY0W { margin-top: 0.2em; } '+
-        '.CommentWebForm_buttons__ZxaQa { flex-direction: row; max-width: 600px; '+
-        'margin: 0.5rem auto 1rem; } '+
-        '.spui-LinkButton--large { min-height: 36px; height: 36px; margin: 0 15px !important; '+
-        'padding: 8px 0 6px; } '+
-        '.CommentWebForm_not-loggedin-title__fp0QC { padding: 20px 0 15px; } '+
-        '.CommentWebForm_not-loggedin__5AZyI + .CommentWebForm_contents__5GCY5 { '+
-        'overflow-y: scroll; overflow-x: hidden; height: calc(100vh - 216px); } '+
-        '#commentName { border-radius: 0; } '+
-        '.CommentWebForm_field__7n0RJ + .CommentWebForm_icon-text__IWdXg { '+
-        'margin-top: 1rem; } '+
+        '.CommentWebFooter_copyrights__YEd65 { padding: 4px 0 3px; font-family: Meiryo; } '+
         '</style></span>';
 
     let header=document.querySelector('header.GlobalHeader_root__fe8f2');
