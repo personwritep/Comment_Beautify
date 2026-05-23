@@ -1,0 +1,61 @@
+// ==UserScript==
+// @name         Comment Beautify
+// @namespace    http://tampermonkey.net/
+// @version      0.2
+// @description  コメント送信画面の文末空白行を削除
+// @author       Ameba Blog User
+// @match        https://comment.ameba.jp/*
+// @noframes
+// @grant        none
+// ==/UserScript==
+
+
+let textarea=document.querySelector('#comment-text-id');
+let send_button=document.querySelector('#js-send-button');
+if(textarea && send_button){
+    send_button.addEventListener('mousedown', function(){
+        textarea.value=textarea.value.trim(); // 文末の空白行を削除
+    }); }
+
+
+
+let set_color=get_cookie('item_color_set');
+let body_=document.querySelector('body');
+body_.style.background=set_color;
+let subfield=document.querySelector('.p-blogSetting__subFieldInner');
+subfield.style.background=set_color;
+document.cookie='item_color_set='+ set_color +'; Max-Age=2592000';
+
+
+
+let header=document.querySelector('#amb_header');
+let sw=document.createElement('input');
+sw.setAttribute('id', 'color_sw');
+sw.setAttribute('type', 'color');
+sw.innerHTML=
+    '<style>#color_sw { width: 23px; border:none; '+
+    'margin: 3px 10px 0 auto; background-color: transparent; }</style>';
+if(!header.querySelector('#color_sw')){
+    header.appendChild(sw); }
+
+let color_sw=document.querySelector('#color_sw');
+color_sw.value=set_color;
+
+color_sw.onchange=function(){
+    let body_=document.querySelector('body');
+    body_.style.background=color_sw.value;
+    let subfield=document.querySelector('.p-blogSetting__subFieldInner');
+    subfield.style.background=color_sw.value;
+    document.cookie='item_color_set='+color_sw.value+'; Max-Age=2592000'; }
+
+
+
+function get_cookie(name){
+    let cookie_req=document.cookie.split('; ').find(row=>row.startsWith(name));
+    if(cookie_req){
+        if(cookie_req.split('=')[1]==null){
+            return 0; }
+        else{
+            return cookie_req.split('=')[1]; }}
+    if(!cookie_req){
+        return '#f8f8f8'; }}
