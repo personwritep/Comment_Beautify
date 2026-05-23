@@ -1,0 +1,19 @@
+// ==UserScript==
+// @name         Comment beautify
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  コメント送信画面の文末空白行を削除
+// @author       Ameba Blog User
+// @match        https://comment.ameba.jp/*
+// @noframes
+// @grant        none
+// ==/UserScript==
+
+window.addEventListener('load', function(){
+    let textarea=document.querySelector('#comment-text-id');
+    let send_button=document.querySelector('#js-send-button');
+    if(textarea && send_button){
+        send_button.addEventListener('mousedown', function(){
+            textarea.value=textarea.value.trim(); // 文末の空白行を削除
+        });
+    }});
