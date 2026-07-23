@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Comment Beautify
 // @namespace        http://tampermonkey.net/
-// @version        1.2
+// @version        1.3
 // @description        コメント送信画面の文末空白行を削除
 // @author        Ameba Blog User
 // @match        https://comment.ameba.jp/*
@@ -195,13 +195,17 @@ function setup(){
 
 
 function get_cookie(name){
-    let cookie_req=document.cookie.split('; ').find(row=>row.startsWith(name));
-    if(cookie_req){
-        if(cookie_req.split('=')[1]==null){
+    let cookie_req=document.cookie.split(';');
+    for(let k=0; k<cookie_req.length; k++){
+        cookie_req[k]=cookie_req[k].trim(); } // 前後の空白を削除
+
+    let cookie=cookie_req.find(row=>row.startsWith(name+'='));
+    if(cookie){
+        if(cookie.split('=')[1]==null){
             return 0; }
         else{
-            return cookie_req.split('=')[1]; }}
-    if(!cookie_req){
+            return cookie.split('=')[1]; }}
+    if(!cookie){
         return 0; }}
 
 
